@@ -1,4 +1,4 @@
-# Zikir Counter App
+# Demo Zikir Counter App
 
 ![Flutter](https://img.shields.io/badge/Flutter-%5E3.7.0-blue)
 ![Version](https://img.shields.io/badge/Version-0.1.0-green)
