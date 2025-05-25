@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'themes.dart';
+import 'theme/themes.dart';
 
 class ApplicationSettings extends StatefulWidget {
   final ThemeNotifier themeNotifier;

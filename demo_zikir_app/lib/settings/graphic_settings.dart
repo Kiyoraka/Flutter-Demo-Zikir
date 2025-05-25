@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'themes.dart';
+import 'theme/themes.dart';
 
 class GraphicSettings extends StatelessWidget {
   final ThemeNotifier themeNotifier;

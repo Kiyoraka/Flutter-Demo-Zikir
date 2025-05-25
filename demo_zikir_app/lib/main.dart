@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'themes.dart';
-import 'settings.dart';
-import 'application_settings.dart';
-import 'graphic_settings.dart';
+import 'settings/theme/themes.dart';
+import 'settings/settings.dart';
+import 'settings/application_settings.dart';
+import 'settings/graphic_settings.dart';
 
 void main() {
   runApp(ZikirApp());
