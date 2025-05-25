@@ -409,4 +409,3 @@ class _ZikirCounterState extends State<ZikirCounter>
   }
 }
 
-// SettingsPage class removed - no longer needed as we now use popup overlays

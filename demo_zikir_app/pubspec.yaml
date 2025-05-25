@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  vibration: ^1.8.1  # For vibration feedback when target is reached
+  vibration: ^3.0.0  # For vibration feedback when target is reached
 
 dev_dependencies:
   flutter_test:
