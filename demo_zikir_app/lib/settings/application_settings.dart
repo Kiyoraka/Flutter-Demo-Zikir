@@ -8,11 +8,13 @@ class ApplicationSettings extends StatefulWidget {
   final Function(bool) onSoundChanged;
   final Function(bool) onConfirmResetChanged;
   final Function(bool) onAutoSaveChanged;
+  final Function(bool) onVolumeButtonCountingChanged;
   final Function(int) onTargetCountChanged;
   final bool vibrationEnabled;
   final bool soundEnabled;
   final bool confirmReset;
   final bool autoSaveCount;
+  final bool volumeButtonCountingEnabled;
   final int targetCount;
 
   const ApplicationSettings({
@@ -22,11 +24,13 @@ class ApplicationSettings extends StatefulWidget {
     required this.onSoundChanged,
     required this.onConfirmResetChanged,
     required this.onAutoSaveChanged,
+    required this.onVolumeButtonCountingChanged,
     required this.onTargetCountChanged,
     required this.vibrationEnabled,
     required this.soundEnabled,
     required this.confirmReset,
     required this.autoSaveCount,
+    required this.volumeButtonCountingEnabled,
     required this.targetCount,
   }) : super(key: key);
 
@@ -128,6 +132,15 @@ class _ApplicationSettingsState extends State<ApplicationSettings> {
                           subtitle: 'Save counter value automatically',
                           value: widget.autoSaveCount,
                           onChanged: widget.onAutoSaveChanged,
+                        ),
+                        
+                        // Volume button counting during screen off
+                        _buildSettingItem(
+                          icon: Icons.volume_down,
+                          title: 'Volume Button Counting',
+                          subtitle: 'Count using volume buttons when screen is off',
+                          value: widget.volumeButtonCountingEnabled,
+                          onChanged: widget.onVolumeButtonCountingChanged,
                         ),
                         
                         // Target count
@@ -314,11 +327,13 @@ void showApplicationSettings({
   required bool soundEnabled,
   required bool confirmReset,
   required bool autoSaveCount,
+  required bool volumeButtonCountingEnabled,
   required int targetCount,
   required Function(bool) onVibrationChanged,
   required Function(bool) onSoundChanged,
   required Function(bool) onConfirmResetChanged,
   required Function(bool) onAutoSaveChanged,
+  required Function(bool) onVolumeButtonCountingChanged,
   required Function(int) onTargetCountChanged,
 }) {
   showDialog(
@@ -330,11 +345,13 @@ void showApplicationSettings({
         soundEnabled: soundEnabled,
         confirmReset: confirmReset,
         autoSaveCount: autoSaveCount,
+        volumeButtonCountingEnabled: volumeButtonCountingEnabled,
         targetCount: targetCount,
         onVibrationChanged: onVibrationChanged,
         onSoundChanged: onSoundChanged,
         onConfirmResetChanged: onConfirmResetChanged,
         onAutoSaveChanged: onAutoSaveChanged,
+        onVolumeButtonCountingChanged: onVolumeButtonCountingChanged,
         onTargetCountChanged: onTargetCountChanged,
       );
     },

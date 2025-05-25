@@ -93,6 +93,7 @@ class _ZikirCounterState extends State<ZikirCounter>
   bool _soundEnabled = true;
   bool _confirmReset = true;
   bool _autoSaveCount = true;
+  bool _volumeButtonCountingEnabled = false;
   int _targetCount = 33;
 
   @override
@@ -151,6 +152,7 @@ class _ZikirCounterState extends State<ZikirCounter>
                                     soundEnabled: _soundEnabled,
                                     confirmReset: _confirmReset,
                                     autoSaveCount: _autoSaveCount,
+                                    volumeButtonCountingEnabled: _volumeButtonCountingEnabled,
                                     targetCount: _targetCount,
                                     onVibrationChanged: (value) {
                                       setState(() {
@@ -170,6 +172,11 @@ class _ZikirCounterState extends State<ZikirCounter>
                                     onAutoSaveChanged: (value) {
                                       setState(() {
                                         _autoSaveCount = value;
+                                      });
+                                    },
+                                    onVolumeButtonCountingChanged: (value) {
+                                      setState(() {
+                                        _volumeButtonCountingEnabled = value;
                                       });
                                     },
                                     onTargetCountChanged: (value) {
