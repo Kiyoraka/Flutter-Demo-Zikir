@@ -39,6 +39,31 @@ class ApplicationSettings extends StatefulWidget {
 }
 
 class _ApplicationSettingsState extends State<ApplicationSettings> {
+  // Controller for the custom count text field
+  late TextEditingController _customCountController;
+  
+  @override
+  void initState() {
+    super.initState();
+    // Initialize controller with current target count
+    _customCountController = TextEditingController(text: widget.targetCount.toString());
+  }
+  
+  @override
+  void dispose() {
+    _customCountController.dispose();
+    super.dispose();
+  }
+  
+  @override
+  void didUpdateWidget(ApplicationSettings oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Update controller when target count changes
+    if (oldWidget.targetCount != widget.targetCount) {
+      _customCountController.text = widget.targetCount.toString();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -212,6 +237,7 @@ class _ApplicationSettingsState extends State<ApplicationSettings> {
                                     children: [
                                       Expanded(
                                         child: TextField(
+                                          controller: _customCountController,
                                           style: TextStyle(color: Colors.white),
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
@@ -220,20 +246,13 @@ class _ApplicationSettingsState extends State<ApplicationSettings> {
                                             border: InputBorder.none,
                                             contentPadding: EdgeInsets.symmetric(vertical: 12),
                                           ),
-                                          onSubmitted: (value) {
-                                            if (value.isNotEmpty) {
-                                              int? customCount = int.tryParse(value);
-                                              if (customCount != null && customCount > 0) {
-                                                widget.onTargetCountChanged(customCount);
-                                              }
-                                            }
-                                          },
+                                          onSubmitted: _updateCustomCount,
                                         ),
                                       ),
                                       IconButton(
                                         icon: Icon(Icons.check, color: Colors.white),
                                         onPressed: () {
-                                          // This will be handled by onSubmitted
+                                          _updateCustomCount(_customCountController.text);
                                         },
                                       ),
                                     ],
@@ -253,6 +272,16 @@ class _ApplicationSettingsState extends State<ApplicationSettings> {
         ),
       ),
     );
+  }
+
+  // Helper method to update custom count
+  void _updateCustomCount(String value) {
+    if (value.isNotEmpty) {
+      int? customCount = int.tryParse(value);
+      if (customCount != null && customCount > 0) {
+        widget.onTargetCountChanged(customCount);
+      }
+    }
   }
 
   Widget _buildSettingItem({
