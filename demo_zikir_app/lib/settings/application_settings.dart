@@ -146,63 +146,57 @@ class _ApplicationSettingsState extends State<ApplicationSettings> {
                         // Target count
                         Padding(
                           padding: EdgeInsets.only(bottom: 15),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                              child: Container(
-                                padding: EdgeInsets.all(15),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(
-                                    color: Colors.white.withOpacity(0.2),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Container(
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.2),
+                                width: 1,
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.flag,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                        SizedBox(width: 15),
-                                        Text(
-                                          'Target Count',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
+                                    Icon(
+                                      Icons.flag,
+                                      color: Colors.white,
+                                      size: 24,
                                     ),
-                                    SizedBox(height: 10),
+                                    SizedBox(width: 15),
                                     Text(
-                                      'Set a target count for your zikir',
+                                      'Target Count',
                                       style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white70,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
                                       ),
-                                    ),
-                                    SizedBox(height: 15),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        _buildTargetCountButton(33),
-                                        _buildTargetCountButton(99),
-                                        _buildTargetCountButton(100),
-                                        _buildTargetCountButton(500),
-                                        _buildTargetCountButton(1000),
-                                      ],
                                     ),
                                   ],
                                 ),
-                              ),
+                                SizedBox(height: 10),
+                                Text(
+                                  'Set a target count for your zikir',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    _buildTargetCountButton(33),
+                                    _buildTargetCountButton(99),
+                                    _buildTargetCountButton(100),
+                                    _buildTargetCountButton(500),
+                                    _buildTargetCountButton(1000),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -227,59 +221,53 @@ class _ApplicationSettingsState extends State<ApplicationSettings> {
   }) {
     return Padding(
       padding: EdgeInsets.only(bottom: 15),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-          child: Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.2),
-                width: 1,
+      child: Container(
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.2),
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 24,
+            ),
+            SizedBox(width: 15),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: Row(
-              children: [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 24,
-                ),
-                SizedBox(width: 15),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Switch(
-                  value: value,
-                  onChanged: onChanged,
-                  activeColor: widget.themeNotifier.currentTheme.gradientColors[0],
-                ),
-              ],
+            Switch(
+              value: value,
+              onChanged: onChanged,
+              activeColor: widget.themeNotifier.currentTheme.gradientColors[0],
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -336,23 +324,68 @@ void showApplicationSettings({
   required Function(bool) onVolumeButtonCountingChanged,
   required Function(int) onTargetCountChanged,
 }) {
+  // Use StatefulBuilder to maintain local state in the dialog
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return ApplicationSettings(
-        themeNotifier: themeNotifier,
-        vibrationEnabled: vibrationEnabled,
-        soundEnabled: soundEnabled,
-        confirmReset: confirmReset,
-        autoSaveCount: autoSaveCount,
-        volumeButtonCountingEnabled: volumeButtonCountingEnabled,
-        targetCount: targetCount,
-        onVibrationChanged: onVibrationChanged,
-        onSoundChanged: onSoundChanged,
-        onConfirmResetChanged: onConfirmResetChanged,
-        onAutoSaveChanged: onAutoSaveChanged,
-        onVolumeButtonCountingChanged: onVolumeButtonCountingChanged,
-        onTargetCountChanged: onTargetCountChanged,
+      // Create local state for immediate UI updates
+      bool localVibrationEnabled = vibrationEnabled;
+      bool localSoundEnabled = soundEnabled;
+      bool localConfirmReset = confirmReset;
+      bool localAutoSaveCount = autoSaveCount;
+      bool localVolumeButtonCountingEnabled = volumeButtonCountingEnabled;
+      int localTargetCount = targetCount;
+      
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return ApplicationSettings(
+            themeNotifier: themeNotifier,
+            vibrationEnabled: localVibrationEnabled,
+            soundEnabled: localSoundEnabled,
+            confirmReset: localConfirmReset,
+            autoSaveCount: localAutoSaveCount,
+            volumeButtonCountingEnabled: localVolumeButtonCountingEnabled,
+            targetCount: localTargetCount,
+            onVibrationChanged: (value) {
+              // Update local state for immediate UI refresh
+              setState(() {
+                localVibrationEnabled = value;
+              });
+              // Also update parent state
+              onVibrationChanged(value);
+            },
+            onSoundChanged: (value) {
+              setState(() {
+                localSoundEnabled = value;
+              });
+              onSoundChanged(value);
+            },
+            onConfirmResetChanged: (value) {
+              setState(() {
+                localConfirmReset = value;
+              });
+              onConfirmResetChanged(value);
+            },
+            onAutoSaveChanged: (value) {
+              setState(() {
+                localAutoSaveCount = value;
+              });
+              onAutoSaveChanged(value);
+            },
+            onVolumeButtonCountingChanged: (value) {
+              setState(() {
+                localVolumeButtonCountingEnabled = value;
+              });
+              onVolumeButtonCountingChanged(value);
+            },
+            onTargetCountChanged: (value) {
+              setState(() {
+                localTargetCount = value;
+              });
+              onTargetCountChanged(value);
+            },
+          );
+        },
       );
     },
   );
