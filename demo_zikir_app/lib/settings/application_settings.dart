@@ -196,6 +196,49 @@ class _ApplicationSettingsState extends State<ApplicationSettings> {
                                     _buildTargetCountButton(1000),
                                   ],
                                 ),
+                                SizedBox(height: 15),
+                                // Custom target count input
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Colors.white.withOpacity(0.3),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextField(
+                                          style: TextStyle(color: Colors.white),
+                                          keyboardType: TextInputType.number,
+                                          decoration: InputDecoration(
+                                            hintText: 'Custom target count',
+                                            hintStyle: TextStyle(color: Colors.white70),
+                                            border: InputBorder.none,
+                                            contentPadding: EdgeInsets.symmetric(vertical: 12),
+                                          ),
+                                          onSubmitted: (value) {
+                                            if (value.isNotEmpty) {
+                                              int? customCount = int.tryParse(value);
+                                              if (customCount != null && customCount > 0) {
+                                                widget.onTargetCountChanged(customCount);
+                                              }
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.check, color: Colors.white),
+                                        onPressed: () {
+                                          // This will be handled by onSubmitted
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),

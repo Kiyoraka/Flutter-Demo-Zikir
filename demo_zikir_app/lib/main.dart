@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:vibration/vibration.dart';
 import 'settings/theme/themes.dart';
 import 'settings/settings.dart';
 import 'settings/application_settings.dart';
@@ -77,9 +78,20 @@ class _ZikirCounterState extends State<ZikirCounter>
     setState(() {
       _counter++;
     });
+    
+    // Trigger animation
     _animationController.forward().then((_) {
       _animationController.reverse();
     });
+    
+    // Check if target count is reached
+    if (_counter == _targetCount && _vibrationEnabled) {
+      // Stronger vibration pattern when target is reached
+      Vibration.vibrate(
+        pattern: [0, 100, 50, 200, 50, 400],
+        intensities: [0, 128, 0, 255, 0, 255],
+      );
+    }
   }
 
   void _resetCounter() {
